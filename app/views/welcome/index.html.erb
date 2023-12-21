@@ -12,6 +12,14 @@
     <div class="splitcontentright">
       <% projects.each do |projeto| %>
           <%= link_to(projeto.name, project_path(projeto), :class => projeto.css_classes + " nav-link active").html_safe %>
+          <% trackers = projeto.rolled_up_trackers(with_subprojects).visible %>
+          <% trackers.each do |tracker| %>
+            <%= link_to tracker.name, project_issues_path(@project, :set_filter => 1, :tracker_id => tracker.id), :title => tracker.description %>
+            <%= link_to @open_issues_by_tracker[tracker].to_i, project_issues_path(@project, :set_filter => 1, :tracker_id => tracker.id) %>
+            <%= link_to (@total_issues_by_tracker[tracker].to_i - @open_issues_by_tracker[tracker].to_i), project_issues_path(@project, :set_filter => 1, :tracker_id => tracker.id, :status_id => 'c') %>
+
+          <% end %>
+
       <% end %>
     </div>
   <% end %>
