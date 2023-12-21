@@ -20,11 +20,17 @@
               <% cond = projeto.project_condition(Setting.display_subprojects_issues?) %>
               <% open_issues_by_tracker = Issue.visible.open.where(cond).group(:tracker).count %>
               <% total_issues_by_tracker = Issue.visible.where(cond).group(:tracker).count %>
-              <div>
-              <%= open_issues_by_tracker[tipo].to_i %>
-              </div>
-              <div>
-              <%= (total_issues_by_tracker[tipo].to_i - open_issues_by_tracker[tipo].to_i) %>
+              <div style='clear: both; padding: 5px'>
+
+                <div style='float: left; padding: 5px'>
+                  <%= tipo.name %>
+                </div>
+                <div style='float: left; padding: 5px'>
+                  <%= open_issues_by_tracker[tipo].to_i %>
+                </div>
+                <div style='float: left; padding: 5px'>
+                  <%= (total_issues_by_tracker[tipo].to_i - open_issues_by_tracker[tipo].to_i) %>
+                </div>
               </div>
 
 
