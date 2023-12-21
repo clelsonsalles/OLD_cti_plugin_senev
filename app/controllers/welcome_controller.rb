@@ -26,6 +26,8 @@ class WelcomeController < ApplicationController
 
   def index
     @news = News.latest User.current
+    @projects = User.current.projects.to_a
+    
   end
 
   def robots
