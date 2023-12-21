@@ -13,13 +13,13 @@
       <% @projects.each do |projeto| %>
           <%= link_to(projeto.name, project_path(projeto), :class => projeto.css_classes + " nav-link active").html_safe %>
           <% trackers = projeto.rolled_up_trackers(Setting.display_subprojects_issues?).visible %>
-          <% trackers.each do |tracker| %>
-            <% if tracker.present? %>
+          <% trackers.each do |tipo| %>
+            <% if tipo.present? %>
               <div>
 
               <% cond = projeto.project_condition(Setting.display_subprojects_issues?) %>
-              <% open_issues_by_tracker = Issue.visible.open.where(cond).group(:tracker).count %>
-              <% total_issues_by_tracker = Issue.visible.where(cond).group(:tracker).count %>
+              <% open_issues_by_tracker = Issue.visible.open.where(cond).group(tipo).count %>
+              <% total_issues_by_tracker = Issue.visible.where(cond).group(tipo).count %>
               <div>
               <%= open_issues_by_tracker %>
               </div>
