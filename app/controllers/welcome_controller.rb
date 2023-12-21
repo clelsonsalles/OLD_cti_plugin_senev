@@ -27,10 +27,6 @@ class WelcomeController < ApplicationController
   def index
     @news = News.latest User.current
     @projects = User.current.projects.to_a
-
-    @open_issues_by_tracker = Issue.visible.open.where(:cond).group(:tracker).count
-    @total_issues_by_tracker = Issue.visible.where(:cond).group(:tracker).count
-
   end
 
   def robots
