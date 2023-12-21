@@ -16,13 +16,17 @@
           <% trackers.each do |tracker| %>
             <% if tracker.present? %>
               <div>
-              <%= link_to tracker.name, project_issues_path(projeto, :set_filter => 1, :tracker_id => tracker.id), :title => tracker.description %>
-                <div>
-                <%= @open_issues_by_tracker([cond, tracker]).to_i  %>
-                </div>
-                <div>
-                <%= (@total_issues_by_tracker([cond, tracker]).to_i - @open_issues_by_tracker([cond, tracker]).to_i) %>
-                </div>
+
+              <% cond = projeto.project_condition(Setting.display_subprojects_issues?) %>
+              <% open_issues_by_tracker = Issue.visible.open.where(cond).group(:tracker).count %>
+              <% total_issues_by_tracker = Issue.visible.where(cond).group(:tracker).count %>
+              <div>
+              <%= open_issues_by_tracker.to_i  %>
+              </div>
+              <div>
+              <%= (total_issues_by_tracker.to_i - open_issues_by_tracker.to_i) %>
+              </div>
+
 
               </div>
             <% end %>
