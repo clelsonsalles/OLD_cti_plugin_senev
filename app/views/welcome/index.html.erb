@@ -8,6 +8,14 @@
   <%= call_hook(:view_welcome_index_left) %>
 
 
+  <% if @projects.any? %>
+    <div class="splitcontentright">
+      <% projects.each do |projeto| %>
+          <%= link_to(projeto.name, project_path(projeto), :class => projeto.css_classes + " nav-link active").html_safe %>
+      <% end %>
+    </div>
+  <% end %>
+
 
 
 
