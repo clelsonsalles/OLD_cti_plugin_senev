@@ -10,7 +10,7 @@
 
   <% if @projects.any? %>
     <div class="splitcontentright">
-      <% projects.each do |projeto| %>
+      <% @projects.each do |projeto| %>
           <%= link_to(projeto.name, project_path(projeto), :class => projeto.css_classes + " nav-link active").html_safe %>
           <% trackers = projeto.rolled_up_trackers(with_subprojects).visible %>
           <% trackers.each do |tracker| %>
