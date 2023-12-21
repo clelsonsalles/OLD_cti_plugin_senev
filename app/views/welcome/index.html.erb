@@ -21,10 +21,10 @@
               <% open_issues_by_tracker = Issue.visible.open.where(cond).group(:tracker).count %>
               <% total_issues_by_tracker = Issue.visible.where(cond).group(:tracker).count %>
               <div>
-              <%= open_issues_by_tracker.to_i  %>
+              <%= open_issues_by_tracker %>
               </div>
               <div>
-              <%= (total_issues_by_tracker.to_i - open_issues_by_tracker.to_i) %>
+              <%= (total_issues_by_tracker - open_issues_by_tracker) %>
               </div>
 
 
